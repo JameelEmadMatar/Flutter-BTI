@@ -1,7 +1,7 @@
 import 'package:my_app/main.dart';
 
 void main() {
-  List<Map> Meals = [
+  List<Map> allMeals = [
   {
     "name": "Burger",
     "image": "20",
@@ -30,8 +30,14 @@ void main() {
     ]
   }
 ];
-  OneMeal test = OneMeal(Meals[0]);
-  print(test.ingreditns?[1].checkenBurger);
+  Meals test = Meals(allMeals);
+  print(test.meals?[0].extras?.bread?.breadDetails?[0].size);
+}
+class Meals{
+  List<OneMeal>? meals;
+  Meals(List list){
+    meals = list.map((e) => OneMeal(e)).toList();
+  }
 }
 class OneMeal{
   /*
