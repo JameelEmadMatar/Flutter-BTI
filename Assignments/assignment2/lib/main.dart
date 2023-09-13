@@ -5,13 +5,13 @@ void main() => runApp(MaterialApp(home: UiScreen()));
 
 
 class UiScreen extends StatelessWidget{
-  List<MapData> MapToMapDataClass(){
-    return dataList.map((e) => MapData(e)).toList();
+  MapData MapToMapDataClass(){
+    return MapData(data);
   }
 
-  List<Widget> DataClassToDataWidget(){
-    List<MapData> mapData = MapToMapDataClass();
-    List<Widget> dataWidget = mapData.map((e) => DataWidget(e)).toList();
+  Widget DataClassToDataWidget(){
+    MapData mapData = MapToMapDataClass();
+    Widget  dataWidget = DataWidget(mapData);
     return dataWidget;
   }
   
@@ -20,7 +20,9 @@ class UiScreen extends StatelessWidget{
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: DataClassToDataWidget(),
+          children: [
+            DataClassToDataWidget(),
+          ],
         ),
       ),
     );
