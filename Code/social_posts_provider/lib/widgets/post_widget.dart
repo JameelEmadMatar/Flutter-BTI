@@ -28,8 +28,8 @@ class _PostWidgetState extends State<PostWidget>{
             children: [
               // User Image
               Container(
-                width: 80,
-                height: 80,
+                width: 60,
+                height: 60,
                 margin: const EdgeInsets.all(10),
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
@@ -90,7 +90,7 @@ class _PostWidgetState extends State<PostWidget>{
                       onTap: (){
                         print('ok');
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.send,
                         size: 35,
                       ),
