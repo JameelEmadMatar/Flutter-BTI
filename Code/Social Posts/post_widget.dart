@@ -1,21 +1,20 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:my_app/post_model.dart';
+import 'package:social_posts_provider/post_model.dart';
 
 class PostWidget extends StatefulWidget{
-  PostModel? postModel;
-  PostWidget(this.postModel);
+  PostModel postModel;
+  Function function;
+  PostWidget(this.postModel, this.function);
 
   @override
   State<PostWidget> createState(){
-    return PostWidgetState();
+    return _PostWidgetState();
   }
 }
-class PostWidgetState extends State<PostWidget>{
+class _PostWidgetState extends State<PostWidget>{
   toggleIsLike(){
-    widget.postModel?.isLiked = !(widget.postModel?.isLiked ?? false);
-    setState((){});
+    widget.postModel.isLiked = !(widget.postModel.isLiked);
+    widget.function();
   }
   @override
   Widget build(BuildContext context) {
@@ -39,13 +38,13 @@ class PostWidgetState extends State<PostWidget>{
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: Image.network(widget.postModel?.user?.imageUrl ?? '' , errorBuilder: (context, error, stackTrace){
+                child: Image.network(widget.postModel.user?.imageUrl ?? '' , errorBuilder: (context, error, stackTrace){
                     return const Icon(Icons.image);
                 },
                 fit: BoxFit.cover,
                 )
               ),
-              Text(widget.postModel?.user?.name ?? 'user',
+              Text(widget.postModel.user?.name ?? 'user',
                 style: const TextStyle(
                   fontSize: 25,
                   color: Colors.blue,
@@ -53,7 +52,7 @@ class PostWidgetState extends State<PostWidget>{
               ) // User Name
             ],
           ),
-          Image.network(widget.postModel?.image ?? '' , errorBuilder:(context, error, stackTrace) {
+          Image.network(widget.postModel.image ?? '' , errorBuilder:(context, error, stackTrace) {
             return Container(
               height: 200,
               width: double.infinity,
@@ -78,12 +77,12 @@ class PostWidgetState extends State<PostWidget>{
                   },
                   child: Icon(
                     Icons.favorite, 
-                    color: (widget.postModel?.isLiked ?? false) ? Colors.red : Colors.grey,
+                    color: widget.postModel.isLiked == true ? Colors.red : Colors.green,
                   ),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: Text(widget.postModel?.content ?? ''),
+                  child: Text(widget.postModel.content ?? ''),
                 ),
                 TextField(
                   onChanged: (value) => {

@@ -1,5 +1,8 @@
-import 'package:my_app/post_model.dart';
+import 'package:social_posts_provider/post_model.dart';
 
+List<PostModel> finalPostsData(){
+  return postsData.map((e) => PostModel(e)).toList();
+}
 List<Map> postsData = [
   {
     "content" : "post content",
