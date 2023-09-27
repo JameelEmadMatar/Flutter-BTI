@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:social_posts_provider/pages/fav_posts.dart';
 import 'package:social_posts_provider/pages/all_posts.dart';
+import 'package:social_posts_provider/pages/fav_posts.dart';
 class PostsScreen extends StatefulWidget{
   @override
   State<PostsScreen> createState() => _PostsScreenState();
@@ -12,6 +13,23 @@ class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("app_name".tr()),
+        actions: [
+          InkWell(
+            onTap: ()  {
+              Locale locale = context.locale;
+              bool isArabic = locale == Locale('ar');
+              if(isArabic){
+                context.setLocale(Locale('en'));
+              }else{
+                context.setLocale(Locale('ar'));
+              }
+            },
+            child: Text('change lang',style: TextStyle(fontSize: 20)),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         selectedItemColor: Colors.green,
@@ -39,7 +57,7 @@ class _PostsScreenState extends State<PostsScreen> {
           AllPosts(),
           FavPosts(),
         ],
-      ),
+      )
     );
   }
 }
